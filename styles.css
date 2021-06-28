@@ -1,0 +1,92 @@
+h1 {
+    text-align: center;
+}
+
+.game-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game {
+    height: 600px;
+    width: 600px;
+    background-color: blanchedalmond;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 60px;
+    color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#modal-wrapper {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: block;
+}
+
+#modal-overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#modal-window {
+    height: 150px;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border: 2px solid black;
+    background-color: cornsilk;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content {
+    display: flex;
+    color: green;
+    text-shadow: 1px 1px darkblue;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#btn-new-game {
+    height: 40px;
+    width: 80px;
+    top: 50%;
+    left: 50%;
+    border: 2px solid black;
+    background-color: green;
+    color: cornsilk;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
