@@ -2,82 +2,86 @@ const game = document.getElementById('game');
 const modalContent = document.getElementById('content');
 const modalWrapper = document.getElementById('modal-wrapper');
 const btnNewGame = document.getElementById('btn-new-game');
+let boardSize;
 let step;
-let player;
-let gameMap;
-const winMap = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-];
+let currentPlayer;
+let playerX = {
+    name: 'X',
+    rowContainer: [],
+    colContainer: [],
+    diagonalContainer: [],
+    oppositeDiagonalContainer: [],
+};
+let player0 = {
+    name: '0',
+    rowContainer: [],
+    colContainer: [],
+    diagonalContainer: [],
+    oppositeDiagonalContainer: [],
+};
 
 btnNewGame.addEventListener('click', () => {
-    clearGameingField();
-    createBoxesForGame();
+    clearGameField();
+    createNewGame();
 });
 
-function clearGameingField() {
+function clearGameField() {
     game.innerHTML = '';
     modalWrapper.style.display = 'none';
 };
 
-function createBoxesForGame() {
+function createNewGame() {
     step = 1;
-    player = 'X';
-    gameMap = new Array(9);
+    currentPlayer = playerX;
+    boardSize = +document.querySelector('input[name="board_size"]:checked').value;
 
-    for (i = 0; i < gameMap.length; i++) {
-        game.innerHTML += `<div class="box" id="${i}"></div>`;
+    for (i = 0; i < boardSize; i++) {
+        playerX.rowContainer[i] = 0;
+        playerX.colContainer[i] = 0;
+        playerX.diagonalContainer[i] = 0;
+        playerX.oppositeDiagonalContainer[i] = 0;
+        player0.rowContainer[i] = 0;
+        player0.colContainer[i] = 0;
+        player0.diagonalContainer[i] = 0;
+        player0.oppositeDiagonalContainer[i] = 0;
+
+        for (k = 0; k < boardSize; k++) {
+            game.innerHTML += `<div class="box${boardSize}" row="${i}" col="${k}"></div>`;
+        };
     };
 };
 
 game.addEventListener('click', (event) => {
     if (!event.target.innerHTML) {
         renderStep(event);
-        writeState(event);
-        checkWinner();
-        changePlayer();
+        checkWinner(+event.target.getAttribute('row'), +event.target.getAttribute('col'));
         goToNextStep();
+        changePlayer();
     };
 });
 
-function changePlayer() {
-    player = player == 'X' ? '0' : 'X';
-};
-
 function renderStep(event) {
-    event.target.innerHTML = player;
+    event.target.innerHTML = currentPlayer.name;
 };
 
-function writeState(event) {
-    gameMap[event.target.id] = player;
-};
-
-function goToNextStep() {
-    step++;
-};
-
-function checkWinner() {
-    for (i in winMap) {
-        let win = true;
-
-        for (k in winMap[i]) {
-            if (gameMap[winMap[i][k]] != player) {
-                win = false;
-            };
-        };
-
-        if (win) {
-            showResult(player);
-        };
+function checkWinner(row, col) {
+    currentPlayer.rowContainer[row] += 1;
+    currentPlayer.colContainer[col] += 1;
+    if (row == col) {
+        currentPlayer.diagonalContainer[row] += 1;
+    };
+    if (+row + col + 1 == boardSize) {
+        currentPlayer.oppositeDiagonalContainer[row] += 1;
     };
 
-    if (step == 9) {
+    let sum = (total, current) => total + current;
+
+    if (currentPlayer.rowContainer[row] == boardSize
+        || currentPlayer.colContainer[col] == boardSize
+        || currentPlayer.diagonalContainer.reduce(sum) == boardSize
+        || currentPlayer.oppositeDiagonalContainer.reduce(sum) == boardSize) {
+        showResult(currentPlayer.name);
+    } else if (step == boardSize * boardSize) {
         showResult('Nobody');
     };
 };
@@ -85,4 +89,12 @@ function checkWinner() {
 function showResult(winner) {
     modalContent.innerHTML = `${winner} Won!`;
     modalWrapper.style.display = 'block';
+};
+
+function goToNextStep() {
+    step++;
+};
+
+function changePlayer() {
+    currentPlayer = step % 2 == 0 ? player0 : playerX;
 };

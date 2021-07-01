@@ -18,12 +18,36 @@ h1 {
     flex-wrap: wrap;
 }
 
-.box {
+.box3 {
     height: 200px;
     width: 200px;
     border: 1px solid black;
     box-sizing: border-box;
     font-size: 60px;
+    color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box4 {
+    height: 150px;
+    width: 150px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 45px;
+    color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box5 {
+    height: 120px;
+    width: 120px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 36px;
     color: brown;
     display: flex;
     justify-content: center;
@@ -52,8 +76,8 @@ h1 {
 }
 
 #modal-window {
-    height: 150px;
-    width: 300px;
+    height: 250px;
+    width: 450px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -89,4 +113,14 @@ h1 {
     align-items: center;
     text-align: center;
     cursor: pointer;
+}
+
+#radio-board-size {
+    display: flex;
+    color: green;
+    text-shadow: 1px 1px darkblue;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
