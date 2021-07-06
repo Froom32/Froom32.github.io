@@ -46,7 +46,7 @@ function createNewGame() {
         player0.oppositeDiagonalContainer[i] = 0;
 
         for (k = 0; k < boardSize; k++) {
-            game.innerHTML += `<div class="box${boardSize}" row="${i}" col="${k}"></div>`;
+            game.innerHTML += `<div class="box${boardSize}" row="${i}" col="${k}" id="${i}${k}"></div>`;
         };
     };
 };
