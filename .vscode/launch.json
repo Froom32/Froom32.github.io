@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-chrome",
+            "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "C:/Users/Mykhailo.bilyk/Documents/learningJS/index.html",
-            "webRoot": "${workspaceFolder}"
+            "file": "${workspaceFolder}/index.html"
         }
     ]
 }
